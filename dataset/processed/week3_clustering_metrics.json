@@ -1,0 +1,767 @@
+{
+  "random_state": 42,
+  "n_init": 10,
+  "scaler": "RobustScaler on numeric columns only; binary encodings left as 0/1",
+  "catalogue_rows": 7787,
+  "movies": {
+    "n": 5377,
+    "n_features": 26,
+    "feature_names": [
+      "release_year",
+      "duration_int",
+      "content_age",
+      "genre_count",
+      "country_count",
+      "aud_Kids",
+      "aud_Teens",
+      "aud_Adults",
+      "aud_Unrated",
+      "cty_United States",
+      "cty_India",
+      "cty_United Kingdom",
+      "cty_Unknown Country",
+      "cty_Other",
+      "genre_International Movies",
+      "genre_Dramas",
+      "genre_Comedies",
+      "genre_Documentaries",
+      "genre_Action & Adventure",
+      "genre_Independent Movies",
+      "genre_Children & Family Movies",
+      "genre_Romantic Movies",
+      "genre_Thrillers",
+      "genre_Stand-Up Comedy",
+      "genre_Music & Musicals",
+      "genre_Horror Movies"
+    ],
+    "numeric_cols": [
+      "release_year",
+      "duration_int",
+      "content_age",
+      "genre_count",
+      "country_count"
+    ],
+    "k_metrics": [
+      {
+        "k": 2,
+        "inertia": 34312.879542197144,
+        "silhouette": 0.5113120912360162,
+        "davies_bouldin": 0.914597255361739,
+        "calinski_harabasz": 2612.5996546593556,
+        "min_cluster_size": 475,
+        "max_cluster_size": 4902,
+        "size_ratio": 10.32
+      },
+      {
+        "k": 3,
+        "inertia": 29234.775669868453,
+        "silhouette": 0.17694014401396468,
+        "davies_bouldin": 1.626902715855645,
+        "calinski_harabasz": 1999.6539477662548,
+        "min_cluster_size": 421,
+        "max_cluster_size": 2908,
+        "size_ratio": 6.907363420427553
+      },
+      {
+        "k": 4,
+        "inertia": 25373.57945324054,
+        "silhouette": 0.18742137006709123,
+        "davies_bouldin": 1.5192984377614893,
+        "calinski_harabasz": 1808.2253166953087,
+        "min_cluster_size": 188,
+        "max_cluster_size": 2563,
+        "size_ratio": 13.632978723404255
+      },
+      {
+        "k": 5,
+        "inertia": 23610.45708741936,
+        "silhouette": 0.19617354448062327,
+        "davies_bouldin": 1.4701102092464988,
+        "calinski_harabasz": 1557.4617949610188,
+        "min_cluster_size": 188,
+        "max_cluster_size": 2376,
+        "size_ratio": 12.638297872340425
+      },
+      {
+        "k": 6,
+        "inertia": 22287.838048551293,
+        "silhouette": 0.1790270838663916,
+        "davies_bouldin": 1.5963104743066008,
+        "calinski_harabasz": 1383.4061476701734,
+        "min_cluster_size": 150,
+        "max_cluster_size": 2129,
+        "size_ratio": 14.193333333333333
+      },
+      {
+        "k": 7,
+        "inertia": 21142.45117008999,
+        "silhouette": 0.1544229720006827,
+        "davies_bouldin": 1.6710191520433229,
+        "calinski_harabasz": 1263.55409133114,
+        "min_cluster_size": 91,
+        "max_cluster_size": 1658,
+        "size_ratio": 18.21978021978022
+      },
+      {
+        "k": 8,
+        "inertia": 20045.576404089763,
+        "silhouette": 0.14746583514182393,
+        "davies_bouldin": 1.6433512041358478,
+        "calinski_harabasz": 1184.0667135639385,
+        "min_cluster_size": 53,
+        "max_cluster_size": 1360,
+        "size_ratio": 25.660377358490567
+      },
+      {
+        "k": 9,
+        "inertia": 19266.05618790384,
+        "silhouette": 0.13980501585510557,
+        "davies_bouldin": 1.7251964587060675,
+        "calinski_harabasz": 1104.9252588733093,
+        "min_cluster_size": 91,
+        "max_cluster_size": 1311,
+        "size_ratio": 14.406593406593407
+      },
+      {
+        "k": 10,
+        "inertia": 18557.136322949635,
+        "silhouette": 0.1394864793904304,
+        "davies_bouldin": 1.6988498054125885,
+        "calinski_harabasz": 1042.267284599516,
+        "min_cluster_size": 26,
+        "max_cluster_size": 1273,
+        "size_ratio": 48.96153846153846
+      }
+    ],
+    "choice": {
+      "selected_k": 4,
+      "silhouette_best_k": 2,
+      "composite_best_k": 2,
+      "selection_rationale": "K=2 maximises silhouette and is retained as a coarse recency baseline. K=4 is the descriptive primary model: the elbow begins to flatten around K=4 and the resulting groups expose additional interpretable runtime/season, genre, and country patterns. This is a practical resolution choice, not a uniquely optimal K.",
+      "selected_metrics": {
+        "k": 4,
+        "inertia": 25373.57945324054,
+        "silhouette": 0.18742137006709123,
+        "davies_bouldin": 1.5192984377614893,
+        "calinski_harabasz": 1808.2253166953087,
+        "min_cluster_size": 188.0,
+        "max_cluster_size": 2563.0,
+        "size_ratio": 13.632978723404255,
+        "composite": 3.25
+      }
+    },
+    "selected_k": 4,
+    "final": {
+      "inertia": 25373.57945324054,
+      "silhouette": 0.18742137006709123,
+      "davies_bouldin": 1.5192984377614893,
+      "calinski_harabasz": 1808.2253166953087,
+      "mean_silhouette_by_cluster": {
+        "0": 0.15508902394409832,
+        "1": 0.1610605309237046,
+        "2": 0.34236418207573566,
+        "3": 0.2280698595592027
+      }
+    },
+    "pca": {
+      "pc1": 0.48486782132455347,
+      "pc2": 0.1523660815855087,
+      "cumulative_2d": 0.6372339029100622
+    },
+    "profiles": [
+      {
+        "cluster": 0,
+        "n": 2563,
+        "pct": 47.67,
+        "mean_release_year": 2016.23,
+        "median_release_year": 2017,
+        "mean_duration_minutes": 109.12,
+        "median_duration_minutes": 106.0,
+        "mean_content_age": 2.3,
+        "median_content_age": 1.0,
+        "mean_genre_count": 2.63,
+        "mean_country_count": 1.33,
+        "top_genres": {
+          "International Movies": 74.7,
+          "Dramas": 58.3,
+          "Comedies": 32.7,
+          "Independent Movies": 19.7,
+          "Action & Adventure": 14.3
+        },
+        "audience_pct": {
+          "Adults": 58.7,
+          "Teens": 38.0,
+          "Kids": 1.9,
+          "Unrated": 1.4
+        },
+        "country_group_pct": {
+          "Other": 52.8,
+          "India": 24.4,
+          "United States": 14.5,
+          "United Kingdom": 5.7,
+          "Unknown Country": 2.6
+        },
+        "top_ratings": {
+          "TV-MA": 40.5,
+          "TV-14": 30.3,
+          "R": 9.8,
+          "TV-PG": 8.4
+        },
+        "label": "Contemporary international feature films"
+      },
+      {
+        "cluster": 1,
+        "n": 791,
+        "pct": 14.71,
+        "mean_release_year": 2002.64,
+        "median_release_year": 2004,
+        "mean_duration_minutes": 114.76,
+        "median_duration_minutes": 109.0,
+        "mean_content_age": 16.23,
+        "median_content_age": 15.0,
+        "mean_genre_count": 2.24,
+        "mean_country_count": 1.29,
+        "top_genres": {
+          "Dramas": 41.6,
+          "Comedies": 41.1,
+          "International Movies": 38.7,
+          "Action & Adventure": 23.6,
+          "Romantic Movies": 14.3
+        },
+        "audience_pct": {
+          "Teens": 57.4,
+          "Adults": 38.4,
+          "Kids": 2.7,
+          "Unrated": 1.5
+        },
+        "country_group_pct": {
+          "United States": 50.8,
+          "India": 23.9,
+          "Other": 18.5,
+          "United Kingdom": 5.6,
+          "Unknown Country": 1.3
+        },
+        "top_ratings": {
+          "TV-14": 23.8,
+          "PG-13": 22.5,
+          "R": 20.9,
+          "PG": 10.7
+        },
+        "label": "Mid-catalogue licensed features"
+      },
+      {
+        "cluster": 2,
+        "n": 188,
+        "pct": 3.5,
+        "mean_release_year": 1974.31,
+        "median_release_year": 1978,
+        "mean_duration_minutes": 116.71,
+        "median_duration_minutes": 110.0,
+        "mean_content_age": 44.48,
+        "median_content_age": 41.0,
+        "mean_genre_count": 2.57,
+        "mean_country_count": 1.13,
+        "top_genres": {
+          "Dramas": 48.4,
+          "International Movies": 46.3,
+          "Comedies": 27.7,
+          "Action & Adventure": 27.1,
+          "Documentaries": 10.1
+        },
+        "audience_pct": {
+          "Teens": 48.4,
+          "Adults": 43.1,
+          "Kids": 5.9,
+          "Unrated": 2.7
+        },
+        "country_group_pct": {
+          "United States": 41.5,
+          "Other": 29.8,
+          "India": 23.4,
+          "United Kingdom": 3.2,
+          "Unknown Country": 2.1
+        },
+        "top_ratings": {
+          "TV-14": 34.0,
+          "R": 16.0,
+          "TV-PG": 14.9,
+          "TV-MA": 12.2
+        },
+        "label": "Classic and vintage cinema"
+      },
+      {
+        "cluster": 3,
+        "n": 1835,
+        "pct": 34.13,
+        "mean_release_year": 2016.69,
+        "median_release_year": 2017,
+        "mean_duration_minutes": 77.16,
+        "median_duration_minutes": 83.0,
+        "mean_content_age": 1.53,
+        "median_content_age": 1.0,
+        "mean_genre_count": 1.39,
+        "mean_country_count": 1.07,
+        "top_genres": {
+          "Documentaries": 32.0,
+          "Stand-Up Comedy": 16.8,
+          "Children & Family Movies": 15.9,
+          "Comedies": 14.0,
+          "Dramas": 10.5
+        },
+        "audience_pct": {
+          "Adults": 61.6,
+          "Teens": 26.5,
+          "Kids": 10.2,
+          "Unrated": 1.7
+        },
+        "country_group_pct": {
+          "United States": 68.0,
+          "Other": 14.6,
+          "Unknown Country": 8.1,
+          "United Kingdom": 8.0,
+          "India": 1.4
+        },
+        "top_ratings": {
+          "TV-MA": 38.5,
+          "TV-14": 13.3,
+          "R": 11.8,
+          "TV-PG": 11.2
+        },
+        "label": "Short-form US docs, stand-up, and family titles"
+      }
+    ],
+    "labels": {
+      "0": "Contemporary international feature films",
+      "1": "Mid-catalogue licensed features",
+      "2": "Classic and vintage cinema",
+      "3": "Short-form US docs, stand-up, and family titles"
+    },
+    "hierarchical": {
+      "sample_size": 250,
+      "ari_kmeans_ward": 0.49519683261250386,
+      "linkage_metrics": {
+        "ward": {
+          "silhouette": 0.1746345316976267,
+          "davies_bouldin": 1.561318049142897,
+          "calinski_harabasz": 76.87285785961905
+        },
+        "average": {
+          "silhouette": 0.36940298068045124,
+          "davies_bouldin": 0.7173094901080315,
+          "calinski_harabasz": 47.18777550919877
+        },
+        "complete": {
+          "silhouette": 0.18401935227220784,
+          "davies_bouldin": 1.2655785682313907,
+          "calinski_harabasz": 72.55557287867245
+        }
+      },
+      "ward_silhouette": 0.1746345316976267,
+      "kmeans_sample_silhouette": 0.21503642297753775,
+      "sampling_note": "Agglomerative clustering and the dendrogram use a stratified sample of 250 Movie titles. Sample results are not claimed to reproduce the full-catalogue partition."
+    },
+    "scaler_center": [
+      2016.0,
+      98.0,
+      1.0,
+      2.0,
+      1.0
+    ],
+    "scaler_scale": [
+      6.0,
+      28.0,
+      7.0,
+      1.0,
+      1.0
+    ]
+  },
+  "tv_shows": {
+    "n": 2410,
+    "n_features": 24,
+    "feature_names": [
+      "release_year",
+      "duration_int",
+      "content_age",
+      "genre_count",
+      "country_count",
+      "aud_Kids",
+      "aud_Teens",
+      "aud_Adults",
+      "aud_Unrated",
+      "cty_United States",
+      "cty_India",
+      "cty_United Kingdom",
+      "cty_Unknown Country",
+      "cty_Other",
+      "genre_International TV Shows",
+      "genre_TV Dramas",
+      "genre_TV Comedies",
+      "genre_Crime TV Shows",
+      "genre_Kids' TV",
+      "genre_Docuseries",
+      "genre_Romantic TV Shows",
+      "genre_British TV Shows",
+      "genre_Reality TV",
+      "genre_Anime Series"
+    ],
+    "numeric_cols": [
+      "release_year",
+      "duration_int",
+      "content_age",
+      "genre_count",
+      "country_count"
+    ],
+    "k_metrics": [
+      {
+        "k": 2,
+        "inertia": 24143.86668798467,
+        "silhouette": 0.6649680158710539,
+        "davies_bouldin": 0.7691481503266341,
+        "calinski_harabasz": 1221.5576718353695,
+        "min_cluster_size": 108,
+        "max_cluster_size": 2302,
+        "size_ratio": 21.314814814814813
+      },
+      {
+        "k": 3,
+        "inertia": 19905.217206950954,
+        "silhouette": 0.4159530510301019,
+        "davies_bouldin": 0.9926119727178623,
+        "calinski_harabasz": 996.8066786965114,
+        "min_cluster_size": 27,
+        "max_cluster_size": 2081,
+        "size_ratio": 77.07407407407408
+      },
+      {
+        "k": 4,
+        "inertia": 16511.715004470567,
+        "silhouette": 0.3836827954131974,
+        "davies_bouldin": 0.99387563500806,
+        "calinski_harabasz": 965.6090956548907,
+        "min_cluster_size": 27,
+        "max_cluster_size": 1909,
+        "size_ratio": 70.70370370370371
+      },
+      {
+        "k": 5,
+        "inertia": 14226.523504157336,
+        "silhouette": 0.3109592605718408,
+        "davies_bouldin": 1.0586752313651724,
+        "calinski_harabasz": 936.7642065678748,
+        "min_cluster_size": 10,
+        "max_cluster_size": 1766,
+        "size_ratio": 176.6
+      },
+      {
+        "k": 6,
+        "inertia": 12822.762845064892,
+        "silhouette": 0.1917823210487246,
+        "davies_bouldin": 1.320973328851121,
+        "calinski_harabasz": 883.741951723087,
+        "min_cluster_size": 10,
+        "max_cluster_size": 1109,
+        "size_ratio": 110.9
+      },
+      {
+        "k": 7,
+        "inertia": 11952.340806779499,
+        "silhouette": 0.1918056951396443,
+        "davies_bouldin": 1.308067125329585,
+        "calinski_harabasz": 818.9380019943376,
+        "min_cluster_size": 10,
+        "max_cluster_size": 1052,
+        "size_ratio": 105.2
+      },
+      {
+        "k": 8,
+        "inertia": 11265.305957092227,
+        "silhouette": 0.1905577766571436,
+        "davies_bouldin": 1.251705171336689,
+        "calinski_harabasz": 765.3579536464049,
+        "min_cluster_size": 2,
+        "max_cluster_size": 1038,
+        "size_ratio": 519.0
+      },
+      {
+        "k": 9,
+        "inertia": 10639.588498227653,
+        "silhouette": 0.1755976890437904,
+        "davies_bouldin": 1.3115668688320108,
+        "calinski_harabasz": 726.4280203859481,
+        "min_cluster_size": 2,
+        "max_cluster_size": 909,
+        "size_ratio": 454.5
+      },
+      {
+        "k": 10,
+        "inertia": 10225.221133324549,
+        "silhouette": 0.16209491223868264,
+        "davies_bouldin": 1.3833748163376973,
+        "calinski_harabasz": 682.4073129993678,
+        "min_cluster_size": 2,
+        "max_cluster_size": 803,
+        "size_ratio": 401.5
+      }
+    ],
+    "choice": {
+      "selected_k": 4,
+      "silhouette_best_k": 2,
+      "composite_best_k": 2,
+      "selection_rationale": "K=2 maximises silhouette and is retained as a coarse recency baseline. K=4 is the descriptive primary model: the elbow begins to flatten around K=4 and the resulting groups expose additional interpretable runtime/season, genre, and country patterns. This is a practical resolution choice, not a uniquely optimal K.",
+      "selected_metrics": {
+        "k": 4,
+        "inertia": 16511.715004470567,
+        "silhouette": 0.3836827954131974,
+        "davies_bouldin": 0.99387563500806,
+        "calinski_harabasz": 965.6090956548907,
+        "min_cluster_size": 27.0,
+        "max_cluster_size": 1909.0,
+        "size_ratio": 70.70370370370371,
+        "composite": 2.75
+      }
+    },
+    "selected_k": 4,
+    "final": {
+      "inertia": 16511.715004470567,
+      "silhouette": 0.3836827954131974,
+      "davies_bouldin": 0.99387563500806,
+      "calinski_harabasz": 965.6090956548907,
+      "mean_silhouette_by_cluster": {
+        "0": 0.21856304012571473,
+        "1": 0.4249074824395404,
+        "2": 0.24705194730373298,
+        "3": 0.23518482263557983
+      }
+    },
+    "pca": {
+      "pc1": 0.5880292976744661,
+      "pc2": 0.17092760906189922,
+      "cumulative_2d": 0.7589569067363653
+    },
+    "profiles": [
+      {
+        "cluster": 0,
+        "n": 278,
+        "pct": 11.54,
+        "mean_release_year": 2008.29,
+        "median_release_year": 2009,
+        "mean_seasons": 1.74,
+        "median_seasons": 1.0,
+        "mean_content_age": 9.8,
+        "median_content_age": 8.0,
+        "mean_genre_count": 2.13,
+        "mean_country_count": 1.12,
+        "top_genres": {
+          "International TV Shows": 47.1,
+          "Kids' TV": 23.7,
+          "TV Comedies": 21.9,
+          "TV Dramas": 19.8,
+          "Romantic TV Shows": 18.0
+        },
+        "audience_pct": {
+          "Teens": 48.9,
+          "Adults": 38.1,
+          "Kids": 12.6,
+          "Unrated": 0.4
+        },
+        "country_group_pct": {
+          "Other": 47.8,
+          "United States": 30.6,
+          "United Kingdom": 11.2,
+          "Unknown Country": 7.9,
+          "India": 2.5
+        },
+        "top_ratings": {
+          "TV-14": 37.4,
+          "TV-MA": 21.9,
+          "TV-PG": 16.2,
+          "TV-Y7": 11.5
+        },
+        "label": "Older acquired television catalogue"
+      },
+      {
+        "cluster": 1,
+        "n": 1909,
+        "pct": 79.21,
+        "mean_release_year": 2017.7,
+        "median_release_year": 2018,
+        "mean_seasons": 1.36,
+        "median_seasons": 1.0,
+        "mean_content_age": 0.88,
+        "median_content_age": 0.0,
+        "mean_genre_count": 2.34,
+        "mean_country_count": 0.98,
+        "top_genres": {
+          "International TV Shows": 53.7,
+          "TV Dramas": 30.0,
+          "TV Comedies": 20.3,
+          "Crime TV Shows": 19.4,
+          "Docuseries": 15.8
+        },
+        "audience_pct": {
+          "Adults": 58.4,
+          "Teens": 31.7,
+          "Kids": 9.8,
+          "Unrated": 0.2
+        },
+        "country_group_pct": {
+          "Other": 45.2,
+          "United States": 29.1,
+          "Unknown Country": 13.1,
+          "United Kingdom": 9.2,
+          "India": 3.5
+        },
+        "top_ratings": {
+          "TV-MA": 46.0,
+          "TV-14": 25.3,
+          "TV-PG": 12.2,
+          "TV-Y": 7.0
+        },
+        "label": "Contemporary mostly single-season series"
+      },
+      {
+        "cluster": 2,
+        "n": 27,
+        "pct": 1.12,
+        "mean_release_year": 1980.96,
+        "median_release_year": 1988,
+        "mean_seasons": 3.33,
+        "median_seasons": 1.0,
+        "mean_content_age": 36.41,
+        "median_content_age": 29.0,
+        "mean_genre_count": 1.81,
+        "mean_country_count": 1.26,
+        "top_genres": {
+          "Kids' TV": 22.2,
+          "TV Comedies": 22.2,
+          "Anime Series": 14.8,
+          "TV Dramas": 14.8,
+          "International TV Shows": 11.1
+        },
+        "audience_pct": {
+          "Teens": 44.4,
+          "Adults": 40.7,
+          "Kids": 14.8
+        },
+        "country_group_pct": {
+          "United States": 55.6,
+          "United Kingdom": 18.5,
+          "Other": 18.5,
+          "Unknown Country": 7.4
+        },
+        "top_ratings": {
+          "TV-14": 33.3,
+          "TV-PG": 25.9,
+          "TV-MA": 14.8,
+          "TV-G": 11.1
+        },
+        "label": "Legacy and vintage television"
+      },
+      {
+        "cluster": 3,
+        "n": 196,
+        "pct": 8.13,
+        "mean_release_year": 2017.54,
+        "median_release_year": 2018,
+        "mean_seasons": 5.71,
+        "median_seasons": 5.0,
+        "mean_content_age": 0.91,
+        "median_content_age": 0.0,
+        "mean_genre_count": 2.14,
+        "mean_country_count": 1.18,
+        "top_genres": {
+          "TV Dramas": 37.2,
+          "TV Comedies": 35.7,
+          "Kids' TV": 20.9,
+          "International TV Shows": 19.9,
+          "Crime TV Shows": 18.9
+        },
+        "audience_pct": {
+          "Adults": 46.9,
+          "Teens": 42.3,
+          "Kids": 10.2,
+          "Unrated": 0.5
+        },
+        "country_group_pct": {
+          "United States": 65.3,
+          "Other": 20.9,
+          "United Kingdom": 12.2,
+          "Unknown Country": 1.5
+        },
+        "top_ratings": {
+          "TV-MA": 38.8,
+          "TV-14": 32.1,
+          "TV-Y7": 10.2,
+          "TV-PG": 8.2
+        },
+        "label": "Multi-season continuing series"
+      }
+    ],
+    "labels": {
+      "0": "Older acquired television catalogue",
+      "1": "Contemporary mostly single-season series",
+      "2": "Legacy and vintage television",
+      "3": "Multi-season continuing series"
+    },
+    "hierarchical": {
+      "sample_size": 250,
+      "ari_kmeans_ward": 0.44826898234844825,
+      "linkage_metrics": {
+        "ward": {
+          "silhouette": 0.21724563938670244,
+          "davies_bouldin": 1.2811459150012174,
+          "calinski_harabasz": 105.76049076120127
+        },
+        "average": {
+          "silhouette": 0.5537183343935208,
+          "davies_bouldin": 0.7677798186272529,
+          "calinski_harabasz": 75.3075584293007
+        },
+        "complete": {
+          "silhouette": 0.4508573854544371,
+          "davies_bouldin": 0.6742468716062153,
+          "calinski_harabasz": 64.21182726038613
+        }
+      },
+      "ward_silhouette": 0.21724563938670244,
+      "kmeans_sample_silhouette": 0.3758431672321488,
+      "sampling_note": "Agglomerative clustering and the dendrogram use a stratified sample of 250 TV Show titles. Sample results are not claimed to reproduce the full-catalogue partition."
+    },
+    "scaler_center": [
+      2018.0,
+      1.0,
+      0.0,
+      2.0,
+      1.0
+    ],
+    "scaler_scale": [
+      4.0,
+      1.0,
+      2.0,
+      1.0,
+      1.0
+    ]
+  },
+  "comparison": {
+    "movie_kmeans_k": 4,
+    "tv_kmeans_k": 4,
+    "movie_kmeans_silhouette": 0.18742137006709123,
+    "tv_kmeans_silhouette": 0.3836827954131974,
+    "movie_kmeans_db": 1.5192984377614893,
+    "tv_kmeans_db": 0.99387563500806,
+    "movie_kmeans_ch": 1808.2253166953087,
+    "tv_kmeans_ch": 965.6090956548907,
+    "movie_hier_sample_ward_silhouette": 0.1746345316976267,
+    "movie_hier_ari": 0.49519683261250386,
+    "tv_hier_sample_ward_silhouette": 0.21724563938670244,
+    "tv_hier_ari": 0.44826898234844825,
+    "movie_kmeans_sample_silhouette": 0.21503642297753775,
+    "tv_kmeans_sample_silhouette": 0.3758431672321488
+  },
+  "method_notes": {
+    "separate_types": "Movies and TV Shows were clustered separately because duration units are not comparable.",
+    "encoding": "Audience and grouped countries are one-hot encoded; frequent genres are multi-hot encoded from listed_in.",
+    "scaling": "RobustScaler is applied to release_year, type-specific duration, content_age, genre_count, and country_count; release year and addition lag capture distinct catalogue timing dimensions.",
+    "identifiers_excluded": "show_id and title were retained only for interpretation and were not used as clustering features."
+  }
+}

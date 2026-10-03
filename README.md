@@ -1,112 +1,114 @@
-# Netflix Movies and TV Shows — Data Analytics Pipeline & EDA
+# Netflix Movies and TV Shows — Data Analytics Pipeline, EDA, and Clustering
 
-**Yuva Internship — Weeks 1 & 2**  
+**Yuva Internship — Weeks 1, 2 & 3**
 **Student Name:** Vikhyath Bharadwaj K S  
-**Domain:** Data Analytics, Data Engineering & Data Visualization  
+**Domain:** Data Analytics, Data Engineering, Data Visualization & Unsupervised Learning
 **Dataset:** Netflix Movies and TV Shows by Shivam Bansal (Kaggle)  
 
 ---
 
-## 📌 Project Overview
-This repository contains the complete end-to-end implementation for **Week 1 and Week 2 of the Yuva Internship program**. The project focuses on building an industry-standard data engineering, exploratory analysis, and data visualization pipeline using the **Netflix Movies and TV Shows** dataset.
+## Project Overview
+This repository contains the Yuva Internship implementation for the **Netflix Movies and TV Shows** dataset.
 
-- **Week 1:** Data Acquisition, Quality Auditing, Transparent Missing Value Imputation, Feature Engineering, and Pipeline Setup.
-- **Week 2:** In-Depth Exploratory Data Analysis (EDA), Multi-Country & Genre Unnesting, Content Seasonality, Duration Distribution Analysis, Publication-Quality Visualizations, and Inferential Statistical Testing (Chi-Square & ANOVA).
+- **Week 1:** Data acquisition, quality auditing, transparent missing-value imputation, feature engineering, and pipeline setup.
+- **Week 2:** Exploratory data analysis, multi-country and genre unnesting, publication-quality visualisations, and inferential tests (chi-square and ANOVA / Kruskal–Wallis).
+- **Week 3:** Unsupervised learning — type-separated K-Means clustering, multi-criteria selection of K, agglomerative hierarchical clustering on documented samples, PCA visualisations, and cluster interpretation of catalogue metadata.
 
----
-
-## 🎯 Internship Objectives
-
-### Week 1 Objectives
-- Establish an organized, reproducible project folder structure.
-- Ingest raw dataset (`7,787` records × `12` columns) and preserve original raw files.
-- Design transparent cleaning operations retaining 100% of data rows.
-- Engineer 16 new temporal, categorical, and numeric analytical attributes.
-- Compile fully executed Jupyter Notebook and formatted DOCX report (`Yuva_Internship_Week1_Report.docx`).
-
-### Week 2 Objectives
-- Perform comprehensive EDA across Content Types, Release Years, Countries, Genres, Ratings, and Durations.
-- Address multi-valued country and genre entries via array unnesting/exploding to avoid co-production undercounting.
-- Generate 12 publication-quality data visualizations using Matplotlib & Seaborn saved in `visualizations/week2/`.
-- Execute formal hypothesis testing (Chi-Square Test of Independence & ANOVA/Kruskal-Wallis Variance Analysis).
-- Develop fully executed Jupyter Notebook (`notebooks/week2_eda_visualization.ipynb`) and academic DOCX report (`reports/Week2_EDA_Visualization_Report.docx`).
+Week 1 and Week 2 deliverables are preserved. Week 3 adds clustering artefacts only.
 
 ---
 
-## 📂 Repository Directory Structure
+## Internship Objectives
+
+### Week 1
+- Organised, reproducible project structure.
+- Ingest the raw table (7,787 records × 12 columns) and keep original files.
+- Clean without dropping rows.
+- Engineer temporal, categorical, and numeric attributes.
+- Fully executed notebook and DOCX report.
+
+### Week 2
+- EDA across type, year, country, genre, rating, and duration.
+- Unnest multi-valued country and genre fields.
+- Twelve Week 2 figures in `visualizations/week2/`.
+- Hypothesis tests and a Week 2 notebook plus DOCX report.
+
+### Week 3
+- Cluster movies and TV shows **separately** so minutes and season counts are never treated as the same unit.
+- Encode audience, grouped country, and frequent genres; Robust-scale numeric fields.
+- Evaluate K-Means for K = 2…10 (inertia, silhouette, Davies–Bouldin, Calinski–Harabasz, size balance).
+- Report **K = 4** as the interpretable primary model for each type, while documenting that **silhouette is highest at K = 2** (older catalogue vs contemporary majority).
+- Compare Ward / average / complete linkage on a stratified sample of 250 titles per type.
+- Characterise clusters with computed statistics and descriptive labels that do **not** claim recommender or viewer-preference insight.
+
+---
+
+## Dataset
+- **Author:** Shivam Bansal (Kaggle)
+- **Source:** [Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
+- **Raw file:** `dataset/original/netflix_titles.csv`
+- **Cleaned:** `dataset/processed/netflix_cleaned.csv`
+- **Processed (Week 1 features):** `dataset/processed/netflix_processed.csv`
+- **Week 3 assignments:** `dataset/processed/netflix_movie_clusters.csv`, `dataset/processed/netflix_tv_clusters.csv`
+
+---
+
+## Technologies
+- **Python 3.13+**
+- **Pandas / NumPy** — wrangling and matrices
+- **Matplotlib / Seaborn** — charts
+- **SciPy** — Week 2 tests; Week 3 hierarchical linkage / dendrograms
+- **Scikit-learn** — K-Means, agglomerative clustering, PCA, RobustScaler, cluster metrics
+- **python-docx** — reports
+- **Jupyter / nbformat / nbconvert** — notebooks
+
+---
+
+## Repository structure
 ```text
 yuva-intern-week1-netflix/
-│
 ├── dataset/
-│   ├── original/
-│   │   └── netflix_titles.csv               # Raw dataset (7,787 rows, 12 columns)
+│   ├── original/netflix_titles.csv
 │   └── processed/
-│       ├── netflix_cleaned.csv              # Imputed dataset (100% row preservation)
-│       └── netflix_processed.csv            # Analysis-ready dataset with 28 columns
-│
+│       ├── netflix_cleaned.csv
+│       ├── netflix_processed.csv
+│       ├── netflix_movie_clusters.csv
+│       ├── netflix_tv_clusters.csv
+│       └── week3_clustering_metrics.json
 ├── notebooks/
-│   ├── netflix_data_analysis.ipynb          # Week 1 Executed Jupyter Notebook
-│   └── week2_eda_visualization.ipynb        # Week 2 Executed Jupyter Notebook
-│
+│   ├── netflix_data_analysis.ipynb          # Week 1
+│   ├── week2_eda_visualization.ipynb        # Week 2
+│   └── week3_clustering_analysis.ipynb      # Week 3
 ├── src/
-│   ├── data_loading.py                      # Data ingestion module
-│   ├── data_cleaning.py                     # Data cleaning & imputation module
-│   ├── preprocessing.py                     # Feature engineering module
-│   ├── eda_analysis.py                      # Week 2 EDA & visualization module
-│   ├── build_notebook.py                    # Week 1 notebook builder
-│   ├── build_week2_notebook.py              # Week 2 notebook builder
-│   ├── generate_report.py                   # Week 1 report builder
-│   └── generate_week2_report.py             # Week 2 report builder
-│
+│   ├── data_loading.py / data_cleaning.py / preprocessing.py
+│   ├── eda_analysis.py
+│   ├── clustering.py
+│   ├── build_notebook.py / build_week2_notebook.py / build_week3_notebook.py
+│   └── generate_report.py / generate_week2_report.py / generate_week3_report.py
 ├── visualizations/
-│   ├── 01_content_type_distribution.png     # Week 1 Visualizations
-│   ├── ...
-│   └── week2/                               # Week 2 Visualizations (12 PNG Charts)
-│       ├── w2_01_content_type_distribution.png
-│       ├── w2_02_release_year_trends.png
-│       ├── w2_03_top_contributing_countries.png
-│       ├── w2_04_top_listed_genres.png
-│       ├── w2_05_content_ratings_by_type.png
-│       ├── w2_06_movie_duration_histogram.png
-│       ├── w2_07_tv_show_seasons_distribution.png
-│       ├── w2_08_genre_content_type_heatmap.png
-│       ├── w2_09_monthly_content_additions.png
-│       ├── w2_10_content_age_lag_distribution.png
-│       ├── w2_11_movie_duration_by_genre_boxplot.png
-│       └── w2_12_country_type_breakdown.png
-│
+│   ├── week2/
+│   └── week3/
+├── screenshots/week3/
 ├── reports/
-│   ├── Yuva_Internship_Week1_Report.docx    # Week 1 DOCX Report
-│   └── Week2_EDA_Visualization_Report.docx  # Week 2 Comprehensive DOCX Report
-│
-├── README.md                                # Comprehensive Project Documentation
-├── requirements.txt                         # Python Library Dependencies
-└── .gitignore                               # Version Control Exclusion Rules
+│   ├── Yuva_Internship_Week1_Report.docx
+│   ├── Week2_EDA_Visualization_Report.docx
+│   └── Week3_Clustering_Analysis_Report.docx
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
 
 ---
 
-## 🛠️ Technologies & Libraries
-- **Python 3.13+**
-- **Pandas**: Data manipulation, unnesting/exploding multi-valued fields, crosstabulation, and datetime feature extraction.
-- **NumPy**: Numeric operations, statistical computations, and array transformations.
-- **Matplotlib & Seaborn**: Multi-panel visualization, distribution estimation (KDE), boxplots, and visual styling.
-- **SciPy (`scipy.stats`)**: Chi-Square Test of Independence, One-Way ANOVA, and Kruskal-Wallis non-parametric tests.
-- **Python-Docx**: Automated formatting and compilation of professional DOCX academic reports.
-- **Jupyter & NbConvert**: Notebook generation and programmatic execution.
+## Setup and how to run
 
----
-
-## 🚀 Setup & Execution Instructions
-
-### 1. Clone Repository & Install Dependencies
 ```bash
 git clone https://github.com/vikhyathks-10/yuva-intern-week1-netflix.git
 cd yuva-intern-week1-netflix
 pip install -r requirements.txt
 ```
 
-### 2. Execute Week 1 Pipeline
+### Week 1
 ```bash
 python src/data_loading.py
 python src/data_cleaning.py
@@ -115,53 +117,94 @@ python src/build_notebook.py
 python src/generate_report.py
 ```
 
-### 3. Execute Week 2 EDA & Visualization Pipeline
+### Week 2
 ```bash
-# Run EDA calculations and generate all 12 Week 2 charts
 python src/eda_analysis.py
-
-# Rebuild and execute the Week 2 Jupyter Notebook
 python src/build_week2_notebook.py
 jupyter nbconvert --to notebook --execute --inplace notebooks/week2_eda_visualization.ipynb
-
-# Generate the Week 2 DOCX Technical Report
 python src/generate_week2_report.py
 ```
 
----
+### Week 3
+```bash
+python src/clustering.py
+python src/build_week3_notebook.py
+jupyter nbconvert --to notebook --execute --inplace notebooks/week3_clustering_analysis.ipynb
+python src/generate_week3_report.py
+```
 
-## 📊 Summary of Main Findings
-
-### Week 1 Data Engineering Summary
-- **Data Integrity:** Retained all 7,787 original rows while resolving missing values in `director`, `cast`, `country`, `rating`, and `date_added`.
-- **Feature Engineering:** Added 16 features including `date_added_dt`, `year_added`, `month_added`, `content_age`, `duration_int`, `primary_genre`, `target_audience`, and `country_count`.
-
-### Week 2 Exploratory Data Analysis Summary
-1. **Content Ratio:** Movies comprise **69.05%** (5,377 titles) while TV Shows account for **30.95%** (2,410 titles).
-2. **Catalog Trends:** Movie releases peaked in 2017 (767 releases), whereas TV Show releases peaked in 2020 (436 releases).
-3. **Geographic Distribution (Unnested):** The **United States** leads overall production (3,297 titles), followed by **India** (990 titles, overwhelmingly Movies) and the **United Kingdom** (723 titles).
-4. **Genre Hierarchy:** **International Movies** (2,437), **Dramas** (2,106), and **Comedies** (1,471) represent the top content categories.
-5. **Rating Concentration:** Mature content (`TV-MA` and `R`) constitutes **>46%** of total listings.
-6. **Duration Statistics:** Movie runtimes follow a normal distribution centered at a median of **98.0 minutes** (mean: 99.3 min). Conversely, **66.7%** of TV Shows feature only 1 season.
-7. **Addition Seasonality:** Content additions peak during Q4 and Q1 (October, December, January).
-8. **Inferential Tests:**
-   - **Chi-Square Test (Type vs Target Audience):** $\chi^2 = 99.71$, $p = 1.80 \times 10^{-21}$ (Significant difference in audience targeting).
-   - **ANOVA Test (Movie Duration across Top 5 Genres):** $F = 359.11$, $p = 3.92 \times 10^{-268}$ (Significant runtime variance across genres).
+From the `notebooks/` folder, run `week3_clustering_analysis.ipynb` top to bottom. Paths are relative (`../dataset/...`, `../src`).
 
 ---
 
-## 📄 Final Deliverables
-- **Week 1 Report:** `reports/Yuva_Internship_Week1_Report.docx`
-- **Week 2 Report:** `reports/Week2_EDA_Visualization_Report.docx`
-- **Week 1 Notebook:** `notebooks/netflix_data_analysis.ipynb`
-- **Week 2 Notebook:** `notebooks/week2_eda_visualization.ipynb`
-- **Cleaned Dataset:** `dataset/processed/netflix_cleaned.csv`
-- **Processed Dataset:** `dataset/processed/netflix_processed.csv`
-- **Visualizations Directory:** `visualizations/week2/` (12 PNG Figures)
+## Clustering methodology (Week 3)
+1. **Split by `type`.** Movie runtime and TV season count are not interchangeable.
+2. **Features.** `release_year`, type-specific `duration_int`, `content_age`, `genre_count`, `country_count`; one-hot `target_audience`; one-hot grouped `primary_country` (US, India, UK, Unknown, Other); multi-hot frequent `listed_in` tags. `release_year` and `content_age` capture original release timing and lag until catalogue addition.
+3. **Excluded from the matrix.** `show_id`, `title`, description, director, cast (kept only to interpret rows).
+4. **Scaling.** RobustScaler on numeric columns only (`random_state=42` for K-Means / PCA / sampling).
+5. **K-Means.** `n_init=10`, K in 2…10.
+6. **K selection.** Elbow + silhouette + Davies–Bouldin + Calinski–Harabasz + size balance + interpretability. Reported K = 4 for both types; silhouette-best K = 2.
+7. **Hierarchical.** Ward (primary), average, and complete on **250 titles** stratified by audience. Sample results are **not** treated as the full-catalogue partition.
+8. **Visualisation.** Elbow, silhouette, DB/CH, sizes, PCA, centroids, boxplots, audience stacks, genre heatmaps, dendrograms.
+
+Figures: [`visualizations/week3/`](visualizations/week3/).
 
 ---
 
-## 📜 Dataset Licensing & Acknowledgments
-- **Dataset Author:** Shivam Bansal (Kaggle)
-- **Dataset Source:** [Kaggle - Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
-- **Licensing:** Public Domain CC0 / Educational use.
+## Important findings
+
+### Week 1
+- All 7,787 rows retained; 16 engineered fields including `content_age`, `duration_int`, `primary_genre`, `target_audience`.
+
+### Week 2
+- Movies 69.05% (5,377) vs TV Shows 30.95% (2,410).
+- Unnested production leaders: United States, India, United Kingdom.
+- Movie median runtime 98 minutes; 66.7% of TV shows have one season.
+
+### Week 3 (primary K-Means, K = 4)
+**Movies (n = 5,377; K=4 silhouette = 0.187; Davies–Bouldin = 1.519; K=2 silhouette = 0.511)**
+| Cluster | Label | n | % | Distinctive observed traits |
+|---:|---|---:|---:|---|
+| 0 | Contemporary international feature films | 2,563 | 47.67% | Mean 109 min; 74.7% International Movies; non-US majority |
+| 1 | Mid-catalogue licensed features | 791 | 14.71% | Mean year ~2003; mean addition lag 16 years; US/India features |
+| 2 | Classic and vintage cinema | 188 | 3.50% | Mean year ~1974; mean lag 44 years |
+| 3 | Short-form US docs, stand-up, and family titles | 1,835 | 34.13% | Mean 77 min; 68% US; docs / stand-up / family |
+
+**TV Shows (n = 2,410; K=4 silhouette = 0.384; Davies–Bouldin = 0.994; K=2 silhouette = 0.665)**
+| Cluster | Label | n | % | Distinctive observed traits |
+|---:|---|---:|---:|---|
+| 0 | Older acquired television catalogue | 278 | 11.54% | Mean year ~2008; mean lag 9.8 years |
+| 1 | Contemporary mostly single-season series | 1,909 | 79.21% | Mean 1.36 seasons; mean year ~2018 |
+| 2 | Legacy and vintage television | 27 | 1.12% | Mean year ~1981; small, geometrically distinct |
+| 3 | Multi-season continuing series | 196 | 8.13% | Mean 5.71 seasons; 65% US |
+
+**Algorithm comparison (K = 4)**
+K-Means vs Ward ARI on samples: movies 0.495; TV 0.448. The K=4 models are practical descriptive partitions, not clear metric optima: K=2 has the best silhouette for both types. Average linkage can post higher *sample* silhouette by isolating compact groups; that is not treated as a better catalogue taxonomy. Full-data K-Means remains the primary reported partition.
+
+These groups are **metadata co-occurrence patterns**. They are not Netflix’s recommendation system and they do not measure viewing behaviour.
+
+---
+
+## Reports and notebooks
+- Week 1 report: `reports/Yuva_Internship_Week1_Report.docx`
+- Week 2 report: `reports/Week2_EDA_Visualization_Report.docx`
+- Week 3 report: `reports/Week3_Clustering_Analysis_Report.docx`
+- Week 1 notebook: `notebooks/netflix_data_analysis.ipynb`
+- Week 2 notebook: `notebooks/week2_eda_visualization.ipynb`
+- Week 3 notebook: `notebooks/week3_clustering_analysis.ipynb`
+- Week 2 figures: `visualizations/week2/`
+- Week 3 figures: `visualizations/week3/`
+
+---
+
+## Limitations and future improvements
+- Mixed numeric/binary Euclidean space; silhouette is inflated by recency outliers at K = 2.
+- Frequent-genre multi-hot is incomplete versus all 42 `listed_in` tags.
+- Hierarchical analysis is sample-based.
+- Two-dimensional PCA discards residual variance (movies ~36% not shown in 2D).
+- Possible extensions: Gower mixed-type distance, HDBSCAN, description embeddings, bootstrap stability of K — still without claiming audience-preference results.
+
+---
+
+## Dataset licensing
+Public-domain CC0 / educational use as listed on the Kaggle dataset page.
