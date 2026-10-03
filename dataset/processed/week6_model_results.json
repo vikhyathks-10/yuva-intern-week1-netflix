@@ -1,0 +1,80 @@
+{
+  "dataset": "Netflix Movies and TV Shows by Shivam Bansal (Kaggle snapshot)",
+  "source": "https://www.kaggle.com/datasets/shivamb/netflix-shows",
+  "access_date": "2026-10-03",
+  "raw_rows": 7787,
+  "raw_columns": 12,
+  "exact_duplicate_rows": 0,
+  "missing_date_added_rows": 98,
+  "missing_release_year_rows": 0,
+  "negative_delay_rows_excluded": 12,
+  "analysis_rows": 7677,
+  "test_rows": 1536,
+  "features": [
+    "type",
+    "rating",
+    "primary_genre",
+    "primary_country",
+    "genre_count",
+    "country_count",
+    "duration_value"
+  ],
+  "target": "catalogue_delay_years = year(date_added) - release_year",
+  "target_note": "Approximate time gap in whole years; not a licensing duration or causal outcome. year_added and release_year excluded from predictors.",
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "cv": "5-fold shuffled KFold on training split"
+  },
+  "models": [
+    {
+      "model": "Random forest",
+      "cv_mae_mean": 3.8067911623475323,
+      "cv_mae_sd": 0.1321455807890627,
+      "cv_rmse_mean": 6.685118895318524,
+      "cv_r2_mean": 0.4238180663015293,
+      "test_mae": 3.7594999359271597,
+      "test_rmse": 6.735542089687107,
+      "test_r2": 0.35693942599058537
+    },
+    {
+      "model": "Histogram gradient boosting",
+      "cv_mae_mean": 3.8887223643806643,
+      "cv_mae_sd": 0.10544571164326108,
+      "cv_rmse_mean": 6.71390926553685,
+      "cv_r2_mean": 0.41851664833645597,
+      "test_mae": 3.8345915928475462,
+      "test_rmse": 6.816615922976497,
+      "test_r2": 0.34136557771209686
+    },
+    {
+      "model": "Ridge regression",
+      "cv_mae_mean": 4.151719538610541,
+      "cv_mae_sd": 0.15381063496927375,
+      "cv_rmse_mean": 6.957227330106387,
+      "cv_r2_mean": 0.3763297658763153,
+      "test_mae": 4.081335405425481,
+      "test_rmse": 7.0993663097229245,
+      "test_r2": 0.2855925979019621
+    },
+    {
+      "model": "Median baseline",
+      "cv_mae_mean": 4.320952921127051,
+      "cv_mae_sd": 0.1737925448973511,
+      "cv_rmse_mean": 9.511825570434745,
+      "cv_r2_mean": -0.16556256608089975,
+      "test_mae": 4.210286458333333,
+      "test_rmse": 9.103177387136135,
+      "test_r2": -0.1746075455100602
+    }
+  ],
+  "selected_model": "Random forest",
+  "test_actual_delay_median": 1.0,
+  "test_actual_delay_mean": 4.509765625,
+  "test_actual_delay_p90": 13.0,
+  "test_prediction_median": 2.7036887982212576,
+  "test_mae": 3.7594999359271597,
+  "test_rmse": 6.735542089687107,
+  "test_r2": 0.35693942599058537,
+  "interpretation": "Associational estimation on one Netflix catalogue snapshot. Does not measure licensing negotiations, audience response, or causal determinants."
+}

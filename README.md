@@ -1,6 +1,6 @@
 # Netflix Movies and TV Shows — Data Analytics and Machine Learning
 
-**Yuva Internship — Weeks 1, 2, 3, 4 & 5**
+**Yuva Internship — Weeks 1, 2, 3, 4, 5 & 6**
 **Student Name:** Vikhyath Bharadwaj K S  
 **Domain:** Data Analytics, Data Engineering, Data Visualization, Unsupervised and Supervised Learning
 **Dataset:** Netflix Movies and TV Shows by Shivam Bansal (Kaggle)  
@@ -15,7 +15,7 @@ This repository contains the Yuva Internship implementation for the **Netflix Mo
 - **Week 3:** Unsupervised learning — type-separated K-Means clustering, multi-criteria selection of K, agglomerative hierarchical clustering on documented samples, PCA visualisations, and cluster interpretation of catalogue metadata.
 - **Week 4:** Supervised learning — leakage-aware Movie/TV Show classification, reusable scikit-learn preprocessing pipelines, stratified cross-validation, model comparison, hyperparameter tuning, and held-out evaluation.
 
-Weeks 1–4 deliverables are preserved. Week 5 adds a reproducible PyTorch CNN workflow, notebook, visualizations, and report.
+Weeks 1–6 are documented below; all completed weekly deliverables are preserved.
 
 ---
 
@@ -60,6 +60,16 @@ Weeks 1–4 deliverables are preserved. Week 5 adds a reproducible PyTorch CNN w
 - CNN: 16- and 32-filter convolution blocks with ReLU and max-pooling; Dense(64), Dropout(0.20), 10 logits. Adam (0.001), cross-entropy, batch 64, 30 epochs, best validation-loss checkpoint.
 - Test results: **95.19% accuracy**, **0.951 macro-F1**, **0.952 weighted-F1** on 270 examples. These are one split on a small, low-resolution benchmark, not evidence of writer-independent generalization.
 
+### Week 6: Final End-to-End Data Science Capstone
+- **Problem:** Describe and estimate an approximate whole-year gap between a title’s `release_year` and recorded `date_added` year using independent catalogue metadata.
+- **Dataset:** Existing Netflix Movies and TV Shows snapshot by Shivam Bansal ([Kaggle source](https://www.kaggle.com/datasets/shivamb/netflix-shows)); original CSV preserved in `dataset/original/`.
+- **Target:** `year(date_added) - release_year`; both component year fields excluded from predictors to prevent arithmetic leakage. This proxy is not licensing duration or a causal outcome.
+- **Method:** Quality audit, EDA, training-only imputation/encoding/scaling in scikit-learn pipelines; median baseline, Ridge, Random Forest and histogram gradient boosting; five-fold training CV and 80/20 held-out split (seed 42).
+- **Actual result:** 7,677 valid nonnegative targets; Random Forest selected by CV MAE. Test MAE **3.76 years**, RMSE **6.74 years**, R² **0.357**. Median baseline test MAE: **4.21 years**.
+- **Key finding:** Target distribution is right-skewed (median 1 year; 90th percentile 13 years). Metadata improves MAE on this split, but substantial error remains and the data do not support claims about licensing, viewing, popularity or causality.
+- **Deliverables:** `notebooks/capstone_data_science_project.ipynb`, `src/capstone_pipeline.py`, `reports/Yuva_Internship_Final_Capstone_Report.docx`, `dataset/DATASET_AND_PREPROCESSING.md`, and `visualizations/week6/`.
+- **Validation:** See `reports/Week6_Validation_Checklist.md`.
+
 ## Dataset
 - **Author:** Shivam Bansal (Kaggle)
 - **Source:** [Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
@@ -94,6 +104,7 @@ yuva-intern-week1-netflix/
 │       ├── netflix_tv_clusters.csv
 │       └── week3_clustering_metrics.json
 ├── notebooks/
+│   ├── capstone_data_science_project.ipynb   # Week 6, executed
 │   ├── netflix_data_analysis.ipynb          # Week 1
 │   ├── week2_eda_visualization.ipynb        # Week 2
 │   ├── week3_clustering_analysis.ipynb      # Week 3
@@ -112,11 +123,17 @@ yuva-intern-week1-netflix/
 │   └── week5/                               # learning curves, confusion matrix, architecture, errors
 ├── screenshots/week3/
 ├── reports/
+│   ├── Yuva_Internship_Final_Capstone_Report.docx # Week 6
+│   ├── Week6_Validation_Checklist.md
 │   ├── Yuva_Internship_Week1_Report.docx
 │   ├── Week2_EDA_Visualization_Report.docx
 │   ├── Week3_Clustering_Analysis_Report.docx
 │   ├── Week4_Supervised_Learning_Report.docx
 │   └── Week5_Deep_Learning_Report.docx
+├── dataset/DATASET_AND_PREPROCESSING.md
+├── src/capstone_pipeline.py / build_capstone_notebook.py / build_capstone_report.py
+├── src/execute_capstone_notebook.py
+├── visualizations/week6/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -132,6 +149,13 @@ Week 4 files are `notebooks/week4_supervised_learning.ipynb`, `src/week4_supervi
 git clone https://github.com/vikhyathks-10/yuva-intern-week1-netflix.git
 cd yuva-intern-week1-netflix
 pip install -r requirements.txt
+```
+
+### Week 6
+```bash
+python src/capstone_pipeline.py
+python src/build_capstone_notebook.py
+jupyter nbconvert --to notebook --execute --inplace notebooks/capstone_data_science_project.ipynb
 ```
 
 ### Week 1
@@ -266,3 +290,9 @@ Install dependencies from `requirements.txt`, then from the repository root run 
 
 ## Dataset licensing
 Week 1–4 Netflix catalogue dataset: educational use as listed on the Kaggle dataset page. Week 5 UCI Optical Recognition of Handwritten Digits: CC BY 4.0; see the [UCI record](https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits).
+
+## Week 6 capstone limitations
+- The source is a single catalogue snapshot; collection process and observation window are not fully documented.
+- The proxy excludes 98 missing/unparseable addition dates and 12 negative year gaps.
+- Random splitting does not test performance on later additions; held-out MAE is about 3.76 years.
+- No licensing, viewing, popularity or causal outcomes are present.

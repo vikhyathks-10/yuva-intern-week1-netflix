@@ -1,0 +1,54 @@
+{
+  "raw_shape": [
+    7787,
+    12
+  ],
+  "missing_by_column": {
+    "show_id": 0,
+    "type": 0,
+    "title": 0,
+    "director": 2389,
+    "cast": 718,
+    "country": 507,
+    "date_added": 10,
+    "release_year": 0,
+    "rating": 7,
+    "duration": 0,
+    "listed_in": 0,
+    "description": 0
+  },
+  "duplicate_rows": 0,
+  "type_counts": {
+    "Movie": 5377,
+    "TV Show": 2410
+  },
+  "rating_counts": {
+    "TV-MA": 2863,
+    "TV-14": 1931,
+    "TV-PG": 806,
+    "R": 665,
+    "PG-13": 386,
+    "TV-Y": 280,
+    "TV-Y7": 271,
+    "PG": 247,
+    "TV-G": 194,
+    "NR": 84,
+    "G": 39,
+    "Missing": 7
+  },
+  "valid_delay_rows": 7677,
+  "delay_describe": {
+    "count": 7677.0,
+    "mean": 4.567799921844471,
+    "std": 8.740020439778068,
+    "min": 0.0,
+    "25%": 0.0,
+    "50%": 1.0,
+    "75%": 5.0,
+    "90%": 13.0,
+    "95%": 21.0,
+    "max": 93.0
+  },
+  "negative_delay_rows": 12,
+  "date_added_missing": 98
+}
