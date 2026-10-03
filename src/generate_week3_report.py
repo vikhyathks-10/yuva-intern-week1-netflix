@@ -1,8 +1,10 @@
 import json
 import os
+from io import BytesIO
 from datetime import date
 
 import docx
+from PIL import Image
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement, parse_xml
@@ -146,7 +148,17 @@ def add_figure(doc, filename, fig_num, title, caption, width=6.0):
     p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_img.paragraph_format.space_before = Pt(8)
     p_img.paragraph_format.keep_with_next = True
-    p_img.add_run().add_picture(path, width=Inches(width))
+    # Embed compact, print-readable JPEGs so the submission DOCX stays under
+    # the portal's 2 MB upload limit. Keep the full-resolution PNGs in the repo.
+    with Image.open(path) as source:
+        image = source.convert("RGBA")
+        image.thumbnail((1450, 1100), Image.Resampling.LANCZOS)
+        background = Image.new("RGB", image.size, "white")
+        background.paste(image, mask=image.getchannel("A"))
+        compact = BytesIO()
+        background.save(compact, format="JPEG", quality=78, optimize=True, progressive=True)
+        compact.seek(0)
+    p_img.add_run().add_picture(compact, width=Inches(width))
     p_cap = doc.add_paragraph()
     p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_cap.paragraph_format.space_after = Pt(10)
