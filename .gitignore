@@ -29,3 +29,8 @@ Thumbs.db
 # Output artifacts that are transient
 *.tmp
 *.log
+
+# Local training artifacts and optional downloaded source data are reproducible.
+models/week5/*.pt
+models/week5/metrics.json
+dataset/original/fashion_mnist/*.gz

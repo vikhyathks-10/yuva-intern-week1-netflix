@@ -1,6 +1,6 @@
 # Netflix Movies and TV Shows — Data Analytics and Machine Learning
 
-**Yuva Internship — Weeks 1, 2, 3 & 4**
+**Yuva Internship — Weeks 1, 2, 3, 4 & 5**
 **Student Name:** Vikhyath Bharadwaj K S  
 **Domain:** Data Analytics, Data Engineering, Data Visualization, Unsupervised and Supervised Learning
 **Dataset:** Netflix Movies and TV Shows by Shivam Bansal (Kaggle)  
@@ -15,7 +15,7 @@ This repository contains the Yuva Internship implementation for the **Netflix Mo
 - **Week 3:** Unsupervised learning — type-separated K-Means clustering, multi-criteria selection of K, agglomerative hierarchical clustering on documented samples, PCA visualisations, and cluster interpretation of catalogue metadata.
 - **Week 4:** Supervised learning — leakage-aware Movie/TV Show classification, reusable scikit-learn preprocessing pipelines, stratified cross-validation, model comparison, hyperparameter tuning, and held-out evaluation.
 
-Weeks 1–3 deliverables are preserved. Week 4 adds supervised modeling artifacts and a report.
+Weeks 1–4 deliverables are preserved. Week 5 adds a reproducible PyTorch CNN workflow, notebook, visualizations, and report.
 
 ---
 
@@ -53,6 +53,13 @@ Weeks 1–3 deliverables are preserved. Week 4 adds supervised modeling artifact
 - Keep a stratified 20% test set outside training CV and tuning. Random state: 42.
 - Interpret coefficients and test errors as metadata associations only; no viewer preference, quality, or business outcome is available in the data.
 
+### Week 5
+- Classify handwritten digits (0–9) from 8×8 grayscale images using a two-block PyTorch CNN.
+- Uses `sklearn.datasets.load_digits`, the bundled 1,797-example copy of the UCI Optical Recognition of Handwritten Digits dataset, so training needs no network download.
+- Stratified train/validation/test split: 70/15/15, seed 42. Normalize pixel values from [0,16] to [0,1].
+- CNN: 16- and 32-filter convolution blocks with ReLU and max-pooling; Dense(64), Dropout(0.20), 10 logits. Adam (0.001), cross-entropy, batch 64, 30 epochs, best validation-loss checkpoint.
+- Test results: **95.19% accuracy**, **0.951 macro-F1**, **0.952 weighted-F1** on 270 examples. These are one split on a small, low-resolution benchmark, not evidence of writer-independent generalization.
+
 ## Dataset
 - **Author:** Shivam Bansal (Kaggle)
 - **Source:** [Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
@@ -64,11 +71,12 @@ Weeks 1–3 deliverables are preserved. Week 4 adds supervised modeling artifact
 ---
 
 ## Technologies
-- **Python 3.13+**
+- **Python 3.12+ (3.13 tested)**
 - **Pandas / NumPy** — wrangling and matrices
 - **Matplotlib / Seaborn** — charts
 - **SciPy** — Week 2 tests; Week 3 hierarchical linkage / dendrograms
-- **Scikit-learn** — preprocessing pipelines, classification, clustering, PCA, scaling, and evaluation metrics
+- **Scikit-learn** — preprocessing pipelines, classification, clustering, PCA, scaling, digits dataset, and evaluation metrics
+- **PyTorch** — Week 5 CNN model, training, and inference
 - **python-docx** — reports
 - **Jupyter / nbformat / nbconvert** — notebooks
 
@@ -89,22 +97,26 @@ yuva-intern-week1-netflix/
 │   ├── netflix_data_analysis.ipynb          # Week 1
 │   ├── week2_eda_visualization.ipynb        # Week 2
 │   ├── week3_clustering_analysis.ipynb      # Week 3
-│   └── week4_supervised_learning.ipynb      # Week 4, executed
+│   ├── week4_supervised_learning.ipynb      # Week 4, executed
+│   └── week5_deep_learning.ipynb             # Week 5
 ├── src/
 │   ├── data_loading.py / data_cleaning.py / preprocessing.py
 │   ├── eda_analysis.py
 │   ├── clustering.py
+│   └── week5/train.py                         # PyTorch CNN training and evaluation
 │   ├── build_notebook.py / build_week2_notebook.py / build_week3_notebook.py
 │   └── generate_report.py / generate_week2_report.py / generate_week3_report.py
 ├── visualizations/
 │   ├── week2/
-│   └── week3/
+│   ├── week3/
+│   └── week5/                               # learning curves, confusion matrix, architecture, errors
 ├── screenshots/week3/
 ├── reports/
 │   ├── Yuva_Internship_Week1_Report.docx
 │   ├── Week2_EDA_Visualization_Report.docx
 │   ├── Week3_Clustering_Analysis_Report.docx
-│   └── Week4_Supervised_Learning_Report.docx
+│   ├── Week4_Supervised_Learning_Report.docx
+│   └── Week5_Deep_Learning_Report.docx
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -226,18 +238,25 @@ These groups are **metadata co-occurrence patterns**. They are not Netflix’s r
 - Week 2 report: `reports/Week2_EDA_Visualization_Report.docx`
 - Week 3 report: `reports/Week3_Clustering_Analysis_Report.docx`
 - Week 4 report: `reports/Week4_Supervised_Learning_Report.docx`
+- Week 5 report: `reports/Week5_Deep_Learning_Report.docx`
 - Week 1 notebook: `notebooks/netflix_data_analysis.ipynb`
 - Week 2 notebook: `notebooks/week2_eda_visualization.ipynb`
 - Week 3 notebook: `notebooks/week3_clustering_analysis.ipynb`
 - Week 4 notebook: `notebooks/week4_supervised_learning.ipynb`
+- Week 5 notebook: `notebooks/week5_deep_learning.ipynb`
+- Week 5 visualizations: `visualizations/week5/` (training curves, confusion matrix, architecture, misclassified examples)
 - Week 2 figures: `visualizations/week2/`
 - Week 3 figures: `visualizations/week3/`
 - Week 4 figures: `visualizations/week4/`
 
 ---
 
+## Run Week 5
+Install dependencies from `requirements.txt`, then from the repository root run `python src/week5/train.py` to train and generate plots. Run `notebooks/week5_deep_learning.ipynb` top-to-bottom for the documented exploration and full workflow. The UCI data are bundled through scikit-learn; no dataset download is required. Artifacts under `models/week5/` are ignored by Git and can be regenerated.
+
 ## Limitations and future improvements
-- Mixed numeric/binary Euclidean space; silhouette is inflated by recency outliers at K = 2.
+- Week 3: mixed numeric/binary Euclidean space; silhouette is inflated by recency outliers at K = 2.
+- Week 5: only 1,797 low-resolution examples; random partitions do not measure generalization to unseen writers. Consider larger data, repeated seeds, writer-aware splits, and augmentation experiments.
 - Frequent-genre multi-hot is incomplete versus all 42 `listed_in` tags.
 - Hierarchical analysis is sample-based.
 - Two-dimensional PCA discards residual variance (movies ~36% not shown in 2D).
@@ -246,4 +265,4 @@ These groups are **metadata co-occurrence patterns**. They are not Netflix’s r
 ---
 
 ## Dataset licensing
-Public-domain CC0 / educational use as listed on the Kaggle dataset page.
+Week 1–4 Netflix catalogue dataset: educational use as listed on the Kaggle dataset page. Week 5 UCI Optical Recognition of Handwritten Digits: CC BY 4.0; see the [UCI record](https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits).
