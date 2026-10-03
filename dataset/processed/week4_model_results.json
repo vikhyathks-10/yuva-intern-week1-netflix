@@ -1,0 +1,286 @@
+{
+  "raw_rows": 7787,
+  "raw_columns": 12,
+  "raw_columns_list": [
+    "show_id",
+    "type",
+    "title",
+    "director",
+    "cast",
+    "country",
+    "date_added",
+    "release_year",
+    "rating",
+    "duration",
+    "listed_in",
+    "description"
+  ],
+  "exact_duplicate_rows": 0,
+  "model_rows": 7787,
+  "excluded_rows": 0,
+  "target_missing_or_invalid_excluded": 0,
+  "target_distribution": {
+    "Movie": 5377,
+    "TV Show": 2410
+  },
+  "feature_missing_counts": {
+    "rating": 0,
+    "primary_genre": 0,
+    "primary_country": 0,
+    "release_year": 0,
+    "year_added": 98,
+    "month_added": 98,
+    "genre_count": 0,
+    "country_count": 0
+  },
+  "feature_columns": [
+    "rating",
+    "primary_genre",
+    "primary_country",
+    "release_year",
+    "year_added",
+    "month_added",
+    "genre_count",
+    "country_count"
+  ],
+  "target": "type",
+  "candidate_regression_feasibility": "Not used: duration is observed only as mixed text and only movie rows carry minutes; identifying the target subset and parsing it narrows scope. Content type has complete, meaningful labels across the catalogue.",
+  "content_rating_feasibility": "Not selected: rating labels are missing and unevenly distributed, and content type/genre metadata may encode rating conventions rather than independent audience suitability.",
+  "split": {
+    "train_rows": 6229,
+    "test_rows": 1558,
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true,
+    "cv": "3-fold shuffled stratified CV"
+  },
+  "comparison": [
+    {
+      "model": "Logistic Regression",
+      "cv_accuracy_mean": 0.9934179095200856,
+      "cv_accuracy_std": 0.0002263120571323698,
+      "cv_macro_f1_mean": 0.9923258588694166,
+      "cv_macro_f1_std": 0.00025546301002897477,
+      "test_accuracy": 0.9955070603337612,
+      "test_macro_f1": 0.994733830527462,
+      "test_weighted_f1": 0.9955031747568451
+    },
+    {
+      "model": "Decision Tree",
+      "cv_accuracy_mean": 0.9932576535558271,
+      "cv_accuracy_std": 0.0014161827675533414,
+      "cv_macro_f1_mean": 0.9921106915124963,
+      "cv_macro_f1_std": 0.0016563414870192938,
+      "test_accuracy": 0.9948652118100129,
+      "test_macro_f1": 0.9939710665369039,
+      "test_weighted_f1": 0.9948562703572816
+    },
+    {
+      "model": "Random Forest",
+      "cv_accuracy_mean": 0.9935783200969484,
+      "cv_accuracy_std": 0.0006017722670778784,
+      "cv_macro_f1_mean": 0.9925207459548567,
+      "cv_macro_f1_std": 0.0006924963070792684,
+      "test_accuracy": 0.9942233632862645,
+      "test_macro_f1": 0.9932600893175155,
+      "test_weighted_f1": 0.9942315404846409
+    },
+    {
+      "model": "K-Nearest Neighbors",
+      "cv_accuracy_mean": 0.9619522346005073,
+      "cv_accuracy_std": 0.0018007073855348169,
+      "cv_macro_f1_mean": 0.9548662647513978,
+      "cv_macro_f1_std": 0.002149321933277909,
+      "test_accuracy": 0.9602053915275995,
+      "test_macro_f1": 0.9523674270441926,
+      "test_weighted_f1": 0.9597341215111921
+    },
+    {
+      "model": "Linear SVM",
+      "cv_accuracy_mean": 0.9948627643063815,
+      "cv_accuracy_std": 0.0002264745614193438,
+      "cv_macro_f1_mean": 0.9940125831138719,
+      "cv_macro_f1_std": 0.00026780153052945714,
+      "test_accuracy": 0.9961489088575096,
+      "test_macro_f1": 0.9955041784015882,
+      "test_weighted_f1": 0.9961532799114481
+    },
+    {
+      "model": "Tuned Linear SVM",
+      "cv_accuracy_mean": 0.9951838946853154,
+      "cv_accuracy_std": 0.00039226176005104676,
+      "cv_macro_f1_mean": 0.9943836522283438,
+      "cv_macro_f1_std": 0.0004601288607456956,
+      "test_accuracy": 0.996790757381258,
+      "test_macro_f1": 0.9962513528092959,
+      "test_weighted_f1": 0.996793495475532,
+      "test_precision_macro": 0.9954103054351899,
+      "test_recall_macro": 0.9971039195421803,
+      "best_params": {
+        "model__C": 2.0,
+        "model__class_weight": "balanced"
+      },
+      "classification_report": {
+        "Movie": {
+          "precision": 0.9990680335507922,
+          "recall": 0.9962825278810409,
+          "f1-score": 0.9976733364355514,
+          "support": 1076.0
+        },
+        "TV Show": {
+          "precision": 0.9917525773195877,
+          "recall": 0.9979253112033195,
+          "f1-score": 0.9948293691830403,
+          "support": 482.0
+        },
+        "accuracy": 0.996790757381258,
+        "macro avg": {
+          "precision": 0.9954103054351899,
+          "recall": 0.9971039195421803,
+          "f1-score": 0.9962513528092959,
+          "support": 1558.0
+        },
+        "weighted avg": {
+          "precision": 0.9968048436256056,
+          "recall": 0.996790757381258,
+          "f1-score": 0.996793495475532,
+          "support": 1558.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1072,
+          4
+        ],
+        [
+          1,
+          481
+        ]
+      ],
+      "labels": [
+        "Movie",
+        "TV Show"
+      ]
+    }
+  ],
+  "final_model": {
+    "model": "Tuned Linear SVM",
+    "cv_accuracy_mean": 0.9951838946853154,
+    "cv_accuracy_std": 0.00039226176005104676,
+    "cv_macro_f1_mean": 0.9943836522283438,
+    "cv_macro_f1_std": 0.0004601288607456956,
+    "test_accuracy": 0.996790757381258,
+    "test_macro_f1": 0.9962513528092959,
+    "test_weighted_f1": 0.996793495475532,
+    "test_precision_macro": 0.9954103054351899,
+    "test_recall_macro": 0.9971039195421803,
+    "best_params": {
+      "model__C": 2.0,
+      "model__class_weight": "balanced"
+    },
+    "classification_report": {
+      "Movie": {
+        "precision": 0.9990680335507922,
+        "recall": 0.9962825278810409,
+        "f1-score": 0.9976733364355514,
+        "support": 1076.0
+      },
+      "TV Show": {
+        "precision": 0.9917525773195877,
+        "recall": 0.9979253112033195,
+        "f1-score": 0.9948293691830403,
+        "support": 482.0
+      },
+      "accuracy": 0.996790757381258,
+      "macro avg": {
+        "precision": 0.9954103054351899,
+        "recall": 0.9971039195421803,
+        "f1-score": 0.9962513528092959,
+        "support": 1558.0
+      },
+      "weighted avg": {
+        "precision": 0.9968048436256056,
+        "recall": 0.996790757381258,
+        "f1-score": 0.996793495475532,
+        "support": 1558.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        1072,
+        4
+      ],
+      [
+        1,
+        481
+      ]
+    ],
+    "labels": [
+      "Movie",
+      "TV Show"
+    ]
+  },
+  "interpretation": "The model predicts a catalogue metadata label. It does not predict viewer preference, popularity, quality, recommendations or future Netflix decisions.",
+  "top_features_abs_coefficient": [
+    {
+      "feature": "categorical__primary_genre_British TV Shows",
+      "mean_absolute_coefficient": 1.9159948381484382
+    },
+    {
+      "feature": "categorical__primary_genre_Anime Series",
+      "mean_absolute_coefficient": 1.8438681097863197
+    },
+    {
+      "feature": "categorical__primary_genre_Docuseries",
+      "mean_absolute_coefficient": 1.8011423980597705
+    },
+    {
+      "feature": "categorical__primary_genre_International TV Shows",
+      "mean_absolute_coefficient": 1.7869118791191283
+    },
+    {
+      "feature": "categorical__primary_genre_Dramas",
+      "mean_absolute_coefficient": 1.6845009229981405
+    },
+    {
+      "feature": "categorical__primary_genre_Kids' TV",
+      "mean_absolute_coefficient": 1.669814955538673
+    },
+    {
+      "feature": "categorical__primary_genre_Comedies",
+      "mean_absolute_coefficient": 1.6675857122653805
+    },
+    {
+      "feature": "categorical__primary_genre_Action & Adventure",
+      "mean_absolute_coefficient": 1.6511145389149586
+    },
+    {
+      "feature": "categorical__primary_genre_Crime TV Shows",
+      "mean_absolute_coefficient": 1.5910912397534336
+    },
+    {
+      "feature": "categorical__primary_genre_Documentaries",
+      "mean_absolute_coefficient": 1.5901048144392584
+    },
+    {
+      "feature": "categorical__primary_genre_Children & Family Movies",
+      "mean_absolute_coefficient": 1.5372560986385189
+    },
+    {
+      "feature": "categorical__primary_genre_Horror Movies",
+      "mean_absolute_coefficient": 1.525810936112958
+    },
+    {
+      "feature": "categorical__primary_genre_Classic Movies",
+      "mean_absolute_coefficient": 1.517441335811783
+    },
+    {
+      "feature": "categorical__primary_genre_International Movies",
+      "mean_absolute_coefficient": 1.4992444738077793
+    },
+    {
+      "feature": "categorical__primary_genre_Stand-Up Comedy",
+      "mean_absolute_coefficient": 1.3849099425257703
+    }
+  ]
+}

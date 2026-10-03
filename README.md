@@ -1,8 +1,8 @@
-# Netflix Movies and TV Shows — Data Analytics Pipeline, EDA, and Clustering
+# Netflix Movies and TV Shows — Data Analytics and Machine Learning
 
-**Yuva Internship — Weeks 1, 2 & 3**
+**Yuva Internship — Weeks 1, 2, 3 & 4**
 **Student Name:** Vikhyath Bharadwaj K S  
-**Domain:** Data Analytics, Data Engineering, Data Visualization & Unsupervised Learning
+**Domain:** Data Analytics, Data Engineering, Data Visualization, Unsupervised and Supervised Learning
 **Dataset:** Netflix Movies and TV Shows by Shivam Bansal (Kaggle)  
 
 ---
@@ -13,8 +13,9 @@ This repository contains the Yuva Internship implementation for the **Netflix Mo
 - **Week 1:** Data acquisition, quality auditing, transparent missing-value imputation, feature engineering, and pipeline setup.
 - **Week 2:** Exploratory data analysis, multi-country and genre unnesting, publication-quality visualisations, and inferential tests (chi-square and ANOVA / Kruskal–Wallis).
 - **Week 3:** Unsupervised learning — type-separated K-Means clustering, multi-criteria selection of K, agglomerative hierarchical clustering on documented samples, PCA visualisations, and cluster interpretation of catalogue metadata.
+- **Week 4:** Supervised learning — leakage-aware Movie/TV Show classification, reusable scikit-learn preprocessing pipelines, stratified cross-validation, model comparison, hyperparameter tuning, and held-out evaluation.
 
-Week 1 and Week 2 deliverables are preserved. Week 3 adds clustering artefacts only.
+Weeks 1–3 deliverables are preserved. Week 4 adds supervised modeling artifacts and a report.
 
 ---
 
@@ -43,6 +44,15 @@ Week 1 and Week 2 deliverables are preserved. Week 3 adds clustering artefacts o
 
 ---
 
+### Week 4
+- Predict the dataset's `type` label (Movie or TV Show) from catalog metadata.
+- Exclude identifiers, free text, duration, and target-derived Week 1 fields; duration explicitly exposes minutes versus seasons and is leakage for this task.
+- Use release year, rating, primary genre/country, genre/country counts, and parsed catalog addition year/month.
+- Fit median imputation and scaling for numeric features and infrequent-aware one-hot encoding for categorical features inside a `ColumnTransformer` pipeline.
+- Compare logistic regression, decision tree, random forest, KNN, and linear SVM with three-fold stratified CV; tune the best CV model family for macro F1.
+- Keep a stratified 20% test set outside training CV and tuning. Random state: 42.
+- Interpret coefficients and test errors as metadata associations only; no viewer preference, quality, or business outcome is available in the data.
+
 ## Dataset
 - **Author:** Shivam Bansal (Kaggle)
 - **Source:** [Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
@@ -58,7 +68,7 @@ Week 1 and Week 2 deliverables are preserved. Week 3 adds clustering artefacts o
 - **Pandas / NumPy** — wrangling and matrices
 - **Matplotlib / Seaborn** — charts
 - **SciPy** — Week 2 tests; Week 3 hierarchical linkage / dendrograms
-- **Scikit-learn** — K-Means, agglomerative clustering, PCA, RobustScaler, cluster metrics
+- **Scikit-learn** — preprocessing pipelines, classification, clustering, PCA, scaling, and evaluation metrics
 - **python-docx** — reports
 - **Jupyter / nbformat / nbconvert** — notebooks
 
@@ -78,7 +88,8 @@ yuva-intern-week1-netflix/
 ├── notebooks/
 │   ├── netflix_data_analysis.ipynb          # Week 1
 │   ├── week2_eda_visualization.ipynb        # Week 2
-│   └── week3_clustering_analysis.ipynb      # Week 3
+│   ├── week3_clustering_analysis.ipynb      # Week 3
+│   └── week4_supervised_learning.ipynb      # Week 4, executed
 ├── src/
 │   ├── data_loading.py / data_cleaning.py / preprocessing.py
 │   ├── eda_analysis.py
@@ -92,7 +103,8 @@ yuva-intern-week1-netflix/
 ├── reports/
 │   ├── Yuva_Internship_Week1_Report.docx
 │   ├── Week2_EDA_Visualization_Report.docx
-│   └── Week3_Clustering_Analysis_Report.docx
+│   ├── Week3_Clustering_Analysis_Report.docx
+│   └── Week4_Supervised_Learning_Report.docx
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -101,6 +113,8 @@ yuva-intern-week1-netflix/
 ---
 
 ## Setup and how to run
+
+Week 4 files are `notebooks/week4_supervised_learning.ipynb`, `src/week4_supervised_learning.py`, `src/build_week4_notebook.py`, and `src/generate_week4_report.py`. Its metrics are saved to `dataset/processed/week4_model_results.json`; figures are in `visualizations/week4/`.
 
 ```bash
 git clone https://github.com/vikhyathks-10/yuva-intern-week1-netflix.git
@@ -133,6 +147,14 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/week3_clustering_a
 python src/generate_week3_report.py
 ```
 
+### Week 4
+```bash
+python src/week4_supervised_learning.py
+python src/build_week4_notebook.py
+jupyter nbconvert --to notebook --execute --inplace notebooks/week4_supervised_learning.ipynb
+python src/generate_week4_report.py
+```
+
 From the `notebooks/` folder, run `week3_clustering_analysis.ipynb` top to bottom. Paths are relative (`../dataset/...`, `../src`).
 
 ---
@@ -152,6 +174,20 @@ Figures: [`visualizations/week3/`](visualizations/week3/).
 ---
 
 ## Important findings
+
+### Week 4
+The selected target is catalog content type. All 7,787 rows have valid target labels in the local snapshot and were eligible after exact duplicate checks. The strongest cross-validation candidate was Linear SVM; its tuned pipeline uses `C=2.0` and balanced class weights. On the held-out 20% test set, tuned Linear SVM achieved **99.68% accuracy**, **0.996 macro F1**, and **0.997 weighted F1** (random state 42). These scores describe separation of this dataset's metadata labels only.
+
+| Model | CV macro F1 | Test accuracy | Test macro F1 | Test weighted F1 |
+|---|---:|---:|---:|---:|
+| Logistic Regression | 0.992 | 0.996 | 0.995 | 0.996 |
+| Decision Tree | 0.992 | 0.995 | 0.994 | 0.995 |
+| Random Forest | 0.993 | 0.994 | 0.993 | 0.994 |
+| K-Nearest Neighbors | 0.955 | 0.960 | 0.952 | 0.960 |
+| Linear SVM | 0.994 | 0.996 | 0.996 | 0.996 |
+| Tuned Linear SVM | 0.994 | 0.997 | 0.996 | 0.997 |
+
+The test support is 1,076 Movies and 482 TV Shows. `dataset/processed/week4_model_results.json` contains unrounded metrics, class-level scores, the confusion matrix, and top coefficient magnitudes.
 
 ### Week 1
 - All 7,787 rows retained; 16 engineered fields including `content_age`, `duration_int`, `primary_genre`, `target_audience`.
@@ -189,11 +225,14 @@ These groups are **metadata co-occurrence patterns**. They are not Netflix’s r
 - Week 1 report: `reports/Yuva_Internship_Week1_Report.docx`
 - Week 2 report: `reports/Week2_EDA_Visualization_Report.docx`
 - Week 3 report: `reports/Week3_Clustering_Analysis_Report.docx`
+- Week 4 report: `reports/Week4_Supervised_Learning_Report.docx`
 - Week 1 notebook: `notebooks/netflix_data_analysis.ipynb`
 - Week 2 notebook: `notebooks/week2_eda_visualization.ipynb`
 - Week 3 notebook: `notebooks/week3_clustering_analysis.ipynb`
+- Week 4 notebook: `notebooks/week4_supervised_learning.ipynb`
 - Week 2 figures: `visualizations/week2/`
 - Week 3 figures: `visualizations/week3/`
+- Week 4 figures: `visualizations/week4/`
 
 ---
 
